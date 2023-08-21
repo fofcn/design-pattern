@@ -1,0 +1,35 @@
+@startuml
+class WordDocxDocumentParser {
++ String processing(String)
+}
+class WordDocDocumentParser {
++ String processing(String)
+}
+class DocumentTypeIsInvalidException {
+}
+class DocumentTypeIsNullException {
+}
+class PDFDocumentParser {
++ String processing(String)
+}
+class DocumentParserFactory {
++ DocumentParser getDocumentParser(DocumentType)
+}
+enum DocumentType {
++  WORD_DOC
++  WORD_DOCX
++  PDF
+}
+interface DocumentParser {
+~ String processing(String)
+}
+
+RuntimeException <|-- DocumentTypeIsInvalidException
+RuntimeException <|-- DocumentTypeIsNullException
+DocumentParser <|.. WordDocxDocumentParser
+DocumentParser <|.. WordDocDocumentParser
+DocumentParser <|.. PDFDocumentParser
+
+DocumentParserFactory -> DocumentParser: create
+
+@enduml
