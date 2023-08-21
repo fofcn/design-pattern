@@ -1,6 +1,12 @@
 @startuml
+class FactoryMain {
++ {static} void main(String[])
+}
 class WordDocxDocumentParser {
 + String processing(String)
+}
+class DefaultDocumentParserFactory {
++ DocumentParser createDocumentParser(DocumentType)
 }
 class WordDocDocumentParser {
 + String processing(String)
@@ -12,8 +18,8 @@ class DocumentTypeIsNullException {
 class PDFDocumentParser {
 + String processing(String)
 }
-class DocumentParserFactory {
-+ DocumentParser getDocumentParser(DocumentType)
+interface DocumentParserFactory {
+~ DocumentParser createDocumentParser(DocumentType)
 }
 enum DocumentType {
 +  WORD_DOC
@@ -24,12 +30,13 @@ interface DocumentParser {
 ~ String processing(String)
 }
 
+
+DocumentParser <|.. WordDocxDocumentParser
+DocumentParserFactory <|.. DefaultDocumentParserFactory
+DocumentParser <|.. WordDocDocumentParser
 RuntimeException <|-- DocumentTypeIsInvalidException
 RuntimeException <|-- DocumentTypeIsNullException
-DocumentParser <|.. WordDocxDocumentParser
-DocumentParser <|.. WordDocDocumentParser
 DocumentParser <|.. PDFDocumentParser
 
 DocumentParserFactory -> DocumentParser: create
-
 @enduml
