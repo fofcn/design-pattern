@@ -1,0 +1,28 @@
+@startuml
+class PDFDocumentParser {
++ String processing(String)
+}
+interface DocumentParser {
+~ String processing(String)
+}
+class DocumentParserContext {
+- DocumentParser documentParser
++ String processingDocument(String)
++ void setDocumentParser(DocumentParser)
+}
+class StrategyMain {
++ {static} void main(String[])
+}
+class WordDocxDocumentParser {
++ String processing(String)
+}
+class WordDocDocumentParser {
++ String processing(String)
+}
+
+
+DocumentParser <|.. PDFDocumentParser
+DocumentParser <|.. WordDocxDocumentParser
+DocumentParser <|.. WordDocDocumentParser
+DocumentParserContext -> DocumentParser: uses
+@enduml
