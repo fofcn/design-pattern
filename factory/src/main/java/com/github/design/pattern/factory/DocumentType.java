@@ -4,6 +4,7 @@ public enum DocumentType {
 
     WORD_DOC,
     WORD_DOCX,
-    PDF
+    PDF,
+    UNKNOWN
 
 }
